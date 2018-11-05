@@ -1,12 +1,6 @@
-FROM node:9-alpine
+FROM boxfuse/flyway
 
-RUN mkdir -p /aws && \
-    apk -Uuv add python3 jq bash && \
-    rm /var/cache/apk/*
+RUN apt-get update && apt-get install jq -y
 
 COPY opt /opt
 RUN chmod +x /opt/resource/*
-
-RUN pip3 install awscli
-
-RUN npm install --loglevel error -g serverless
